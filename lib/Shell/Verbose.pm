@@ -1,4 +1,9 @@
+## no critic
 package Shell::Verbose;
+{
+  $Shell::Verbose::VERSION = '0.2';
+}
+## use critic
 use strict;
 use warnings;
 
@@ -37,16 +42,18 @@ Shell::Verbose - A verbose version of system()
 
 A simple wrapper for system() that prints the command
 
+=head1 SOURCE
+
+L<https://github.com/dinomite/Shell-Verbose>
+
 =head1 AUTHOR
 
 Drew Stephens <drew@dinomite.net>
 
 =cut
 
-our ($VERSION, @ISA, @EXPORT_OK);
+our (@ISA, @EXPORT_OK);
 BEGIN {
-    $VERSION = '0.1.1';
-
     require Exporter;
     @ISA = qw/Exporter/;
     @EXPORT_OK = qw/verboseSystem vsys/;
