@@ -1,7 +1,7 @@
 ## no critic
 package Shell::Verbose;
 {
-  $Shell::Verbose::VERSION = '0.2';
+  $Shell::Verbose::VERSION = '0.3';
 }
 ## use critic
 use strict;
@@ -13,15 +13,20 @@ Shell::Verbose - A verbose version of system()
 
 =head1 SYNOPSIS
 
+    # Nothing is exported by default
     use Shell::Verbose qw/verboseSystem vsys/;
 
     verboseSystem('echo "foo"');
     # echo "foo"
     # foo
 
+    # Short form
     vsys('echo "foo"');
     # echo "foo"
     # foo
+
+    # Returns a true value when the command is successful
+    print "How did true fail!?\n" unless (vsys('true');
 
     Shell::Verbose->prefix('===> ');
     # ===> echo 'foo'
@@ -42,13 +47,7 @@ Shell::Verbose - A verbose version of system()
 
 A simple wrapper for system() that prints the command
 
-=head1 SOURCE
-
-L<https://github.com/dinomite/Shell-Verbose>
-
-=head1 AUTHOR
-
-Drew Stephens <drew@dinomite.net>
+=head1 METHODS
 
 =cut
 
@@ -78,6 +77,17 @@ sub after {
     $before = shift;
 }
 
+=head2 verboseSystem($command)
+
+Run the specified command, printing the command along with before, prefix,
+and after if defined.
+
+Returns the inverse of shell success, that is a true value (1) if the command
+exited with zero status (success) and a false value (0) if the command exited
+with a non-zero status (failure).  See $? ($CHILD_ERROR) for the real deets.
+
+=cut
+
 sub verboseSystem {
     my $command = shift;
 
@@ -91,5 +101,15 @@ sub verboseSystem {
 sub vsys {
     verboseSystem(@_);
 }
+
+=head1 SOURCE
+
+L<https://github.com/dinomite/Shell-Verbose>
+
+=head1 AUTHOR
+
+Drew Stephens <drew@dinomite.net>
+
+=cut
 
 1;
