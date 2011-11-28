@@ -1,7 +1,7 @@
 ## no critic
 package Shell::Verbose;
 {
-  $Shell::Verbose::VERSION = '0.3';
+  $Shell::Verbose::VERSION = '0.4';
 }
 ## use critic
 use strict;
@@ -65,16 +65,19 @@ my $after = '';
 sub prefix {
     shift;
     $prefix = shift;
+    return $prefix
 }
 
 sub before {
     shift;
     $before = shift;
+    return $before;
 }
 
 sub after {
     shift;
-    $before = shift;
+    $after = shift;
+    return $after;
 }
 
 =head2 verboseSystem($command)
